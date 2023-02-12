@@ -5,4 +5,6 @@ class Boxs {
   static const SECOND_BOX = 'second';
   static const LASTED_BOX = 'last';
   static const LENGTH = 10;
+  static const BUTTON_LEFT = 'left';
+  static const BUTTON_RIGTH = 'rigth';
 }
