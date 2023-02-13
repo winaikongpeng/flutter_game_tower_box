@@ -43,7 +43,7 @@ class BoxWidgets {
     );
   }
 
-  static Widget buttonCirle({
+  static Widget buttonCircle({
     required void Function()? onTap,
     required String type,
   }) {
