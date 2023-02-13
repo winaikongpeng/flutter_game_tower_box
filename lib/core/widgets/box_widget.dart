@@ -23,15 +23,15 @@ class BoxWidgets {
   }) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 35),
+        padding: EdgeInsets.only(bottom: size * 0.07),
         child: Transform(
           alignment: Alignment.center,
           transform: Matrix4.rotationZ(
             math.pi / 4,
           ),
           child: Container(
-            width: size,
-            height: size,
+            width: size * 0.3,
+            height: size * 0.3,
             decoration: BoxDecoration(
               color: Colors.purple,
               border: Border.all(
