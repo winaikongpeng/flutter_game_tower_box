@@ -3,13 +3,14 @@ import 'package:flutter_game_tower_box/core/constants/box_constant.dart';
 import 'dart:math' as math;
 
 class BoxWidgets {
-  static Widget customBox({required String styleBox}) {
+  static Widget customBox({required String styleBox, required double size}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: Container(
-        height: 100,
+        height: size,
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
+          border: Border.all(
+              color: const Color.fromARGB(255, 70, 69, 69), width: 2),
           borderRadius: BorderRadius.circular(10),
           color: styleBox == Boxs.FIRST_BOX ? Colors.pink : Colors.lightBlue,
         ),
@@ -17,16 +18,25 @@ class BoxWidgets {
     );
   }
 
-  static Widget lastedBox() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 5),
-      child: Transform.rotate(
-        angle: -math.pi / 5,
-        child: Container(
-          height: 100,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
-            color: Colors.purple,
+  static Widget lastedBox({
+    required double size,
+  }) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 35),
+        child: Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.rotationZ(
+            math.pi / 4,
+          ),
+          child: Container(
+            width: size,
+            height: size,
+            decoration: BoxDecoration(
+              color: Colors.purple,
+              border: Border.all(
+                  color: const Color.fromARGB(255, 70, 69, 69), width: 2),
+            ),
           ),
         ),
       ),
@@ -38,6 +48,7 @@ class BoxWidgets {
     required String type,
   }) {
     return InkWell(
+      splashColor: Colors.black,
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -45,7 +56,8 @@ class BoxWidgets {
           width: 100,
           height: 100,
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
+              border: Border.all(
+                  color: const Color.fromARGB(255, 70, 69, 69), width: 2),
               color: type == Boxs.BUTTON_LEFT ? Colors.pink : Colors.lightBlue,
               shape: BoxShape.circle),
         ),

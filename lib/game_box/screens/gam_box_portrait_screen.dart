@@ -6,20 +6,14 @@ import 'package:flutter_game_tower_box/game_box/models/box_model.dart';
 import '../../core/constants/box_constant.dart';
 import '../bloc/game_box_bloc.dart';
 
-class GameBoxScreen extends StatefulWidget {
-  const GameBoxScreen({super.key});
+class GameBoxPortraitScreen extends StatefulWidget {
+  const GameBoxPortraitScreen({super.key});
 
   @override
-  State<GameBoxScreen> createState() => _GameBoxScreenState();
+  State<GameBoxPortraitScreen> createState() => _GameBoxPortraitScreenState();
 }
 
-class _GameBoxScreenState extends State<GameBoxScreen> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<GameBoxBloc>().add(GenerateRandomBoxEvent());
-  }
-
+class _GameBoxPortraitScreenState extends State<GameBoxPortraitScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +41,7 @@ class _GameBoxScreenState extends State<GameBoxScreen> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: MediaQuery.of(context).size.height * 0.25,
+        height: MediaQuery.of(context).size.height * 0.2,
         color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -73,11 +67,13 @@ class _GameBoxScreenState extends State<GameBoxScreen> {
           itemCount: boxs.length,
           itemBuilder: ((context, index) {
             String styleBox = boxs[index].styleBox;
-
             if (styleBox == Boxs.LASTED_BOX) {
-              return BoxWidgets.lastedBox();
+              return BoxWidgets.lastedBox(
+                  size: MediaQuery.of(context).size.width * 0.3);
             }
-            return BoxWidgets.customBox(styleBox: styleBox);
+            return BoxWidgets.customBox(
+                styleBox: styleBox,
+                size: MediaQuery.of(context).size.width * 0.2);
           }),
         ),
       ),
