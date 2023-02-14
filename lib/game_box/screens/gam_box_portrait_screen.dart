@@ -1,9 +1,13 @@
 
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_tower_box/core/widgets/box_widget.dart';
+import 'package:flutter_game_tower_box/core/widgets/dialog_widget.dart';
+import 'package:flutter_game_tower_box/game_box/bloc/game_box_event.dart';
 import 'package:flutter_game_tower_box/game_box/bloc/game_box_state.dart';
 import 'package:flutter_game_tower_box/game_box/models/box_model.dart';
 import '../../core/constants/box_constant.dart';
@@ -18,7 +22,12 @@ class GameBoxPortraitScreen extends StatefulWidget {
 
 class _GameBoxPortraitScreenState extends State<GameBoxPortraitScreen> {
  final ScrollController _scrollController = ScrollController(); 
- final GlobalKey<TooltipState> tooltipkey = GlobalKey<TooltipState>();
+ final GlobalKey<TooltipState> tooltipkeyLeft = GlobalKey<TooltipState>();
+  final GlobalKey<TooltipState> tooltipkeyRigth = GlobalKey<TooltipState>();
+  late Timer _timer;
+
+  //  Timer? countdownTimer;
+  // Duration duration = const Duration(seconds: 2);
 
   @override
   void initState() {
@@ -29,8 +38,36 @@ class _GameBoxPortraitScreenState extends State<GameBoxPortraitScreen> {
 
   }
 
+  // void setCountDown() {
+  //   const reduceSecondsBy = 1;
+  //   setState(() {
+  //     final seconds = duration.inSeconds - reduceSecondsBy;
+  //     if (seconds < 0) {
+  //       countdownTimer!.cancel();
+  //     } else {
+  //       duration = Duration(seconds: seconds);
+  //     }
+  //   });
+  // }
+
+  // void startTimer() {
+  //   countdownTimer =
+  //       Timer.periodic(const Duration(seconds: 1), (_) =>setCountDown() );
+  // }
+
+  // void stopTimer() {
+  //   setState(() => countdownTimer!.cancel());
+  // }
+
+  //  void resetTimer() {
+  //   stopTimer();
+  //   setState(() => duration = const Duration(seconds: 2));
+  // }
+
   @override
   Widget build(BuildContext context) {
+    //  String strDigits(int n) => n.toString().padLeft(1, '0');
+    //  final seconds = strDigits(duration.inSeconds.remainder(60));
     return Scaffold(
       backgroundColor: Colors.grey,
       body: SingleChildScrollView(
@@ -39,39 +76,86 @@ class _GameBoxPortraitScreenState extends State<GameBoxPortraitScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-Tooltip(
-  message: "long press to open dialog",
-  key: tooltipkey,
-  triggerMode: TooltipTriggerMode.manual,
-  child: GestureDetector(
-    onTap: () {
-      tooltipkey.currentState?.ensureTooltipVisible();
-    },
-    onLongPress: () {
-      print("show dialog");
-    },
-    child: Text("dialog"),
-  )),
+// GestureDetector(
+//   onTap: () {
+//     tooltipkeyRigth.currentState?.ensureTooltipVisible();
+//   },
+//   // onLongPress: () {
+//   //   print("show dialog");
+//   // },
+//   onLongPressStart: (start) async{
+//     print('start');
+  
+//     startTimer();
+
+//     DialogWidget.showProgressDialog(context , seconds);
+
+//     await Future.delayed(const Duration(seconds: 2), (){
+      
+//       print('end');
+//        Navigator.pop(context);
+//        resetTimer();
+
+//     });
+//   },
+
+//   child: Text("dialog"),
+// ),
 
 
 
-            // SizedBox(
-            //   height: MediaQuery.of(context).size.height * 0.1,
-            // ),
-            // BlocConsumer<GameBoxBloc, GameBoxState>(
-            //   builder: (ctx, state) {
-            //     if (state is GenerateRandomBoxStateSuccess) {
-            //       return _generateBox(context, boxs: state.boxs);
-            //     }
-            //     return const SizedBox();
-            //   },
-            //   listener: (ctx, state) {
-            //     if (state is ErrorState) {
-            //       // ignore: avoid_print
-            //       print(state.message);
-            //     }
-            //   },
-            // )
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.1,
+            ),
+            BlocConsumer<GameBoxBloc, GameBoxState>(
+              builder: (context, state) {
+                if (state is GenerateRandomBoxStateSuccess) {
+                  return _generateBox(context, boxs: state.boxs);
+                }
+                return const SizedBox();
+              },
+              listener: (ctx, state) {
+                if (state is ErrorState) {
+                  // ignore: avoid_print
+                  print(state.message);
+                }
+               else if (state is ProgressState)  {
+
+              
+                 
+
+ showDialog(
+  context: ctx,
+  builder: (BuildContext builderContext) {
+    _timer = Timer(Duration(seconds: 2), () {
+      Navigator.of(context).pop();
+    });
+
+    return AlertDialog(
+      backgroundColor: Colors.red,
+      title: Text('Title'),
+      content: SingleChildScrollView(
+        child: Text('Content'),
+      ),
+   );
+  }
+).then((val){
+  if (_timer.isActive) {
+    _timer.cancel();
+  }
+});
+
+
+
+
+
+                }
+              else  if (state is EndProgressState) {
+                  // ignore: avoid_print
+                Navigator.of(ctx);
+                }
+              },
+            )
           ],
         ),
       ),
@@ -79,20 +163,33 @@ Tooltip(
     );
   }
 
-  Widget _buildButton(BuildContext context) {
+
+
+  Widget _buildButton(BuildContext context ) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.2,
       color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          BoxWidgets.buttonCircle(type: Boxs.BUTTON_LEFT, onTap: () {
-
-            print('ontap buttun left');
-          }),
-          BoxWidgets.buttonCircle(type: Boxs.BUTTON_RIGTH, onTap: () {
-              print('ontap buttun rigth');
-
+          BoxWidgets.buttonCircle(
+            key:tooltipkeyLeft ,
+            
+            type: Boxs.BUTTON_LEFT, onTap: () {
+             tooltipkeyLeft.currentState?.ensureTooltipVisible();
+          },onLongPress: (){
+                print('onLongPress left portrait');
+               context.read<GameBoxBloc>().add(DestroyBoxEvent(index: 0 , type: ''));
+          }
+          
+          ),
+          BoxWidgets.buttonCircle(
+             key:tooltipkeyRigth ,
+            type: Boxs.BUTTON_RIGTH, onTap: () {
+              tooltipkeyRigth.currentState?.ensureTooltipVisible();
+          },
+          onLongPress: (){
+              print('onLongPress rigth portrait');
           }),
         ],
       ),

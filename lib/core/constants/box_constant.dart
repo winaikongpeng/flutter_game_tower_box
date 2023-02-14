@@ -7,4 +7,6 @@ class Boxs {
   static const LENGTH = 10;
   static const BUTTON_LEFT = 'left';
   static const BUTTON_RIGTH = 'rigth';
+
+  static const MESSAGE_ONTAP = 'long press to destroy box';
 }

@@ -44,22 +44,30 @@ class BoxWidgets {
   }
 
   static Widget buttonCircle({
+    required Key key,
     required void Function()? onTap,
+     required void Function()? onLongPress,
     required String type,
   }) {
-    return InkWell(
-      splashColor: Colors.black,
-      onLongPress: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          width: 100,
-          height: 100,
-          decoration: BoxDecoration(
-              border: Border.all(
-                  color: const Color.fromARGB(255, 70, 69, 69), width: 2),
-              color: type == Boxs.BUTTON_LEFT ? Colors.pink : Colors.lightBlue,
-              shape: BoxShape.circle),
+    return Tooltip(
+      message: Boxs.MESSAGE_ONTAP,
+      child: InkWell(
+        key: key,
+        splashColor: Colors.black,
+        onLongPress: onLongPress,
+        
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: const Color.fromARGB(255, 70, 69, 69), width: 2),
+                color: type == Boxs.BUTTON_LEFT ? Colors.pink : Colors.lightBlue,
+                shape: BoxShape.circle),
+          ),
         ),
       ),
     );

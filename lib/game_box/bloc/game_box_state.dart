@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:flutter_game_tower_box/core/constants/box_constant.dart';
 import 'package:flutter_game_tower_box/game_box/models/box_model.dart';
 
-abstract class GameBoxState {}
+abstract class GameBoxState {
+   
+}
 
 class Initialzed extends GameBoxState {}
 

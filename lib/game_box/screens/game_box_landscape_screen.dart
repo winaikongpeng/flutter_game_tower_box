@@ -18,6 +18,8 @@ class GameBoxLandScapeScreen extends StatefulWidget {
 
 class _GameBoxLandScapeScreenState extends State<GameBoxLandScapeScreen> {
  final ScrollController _scrollController = ScrollController(); 
+ final GlobalKey<TooltipState> tooltipkeyLeft = GlobalKey<TooltipState>();
+  final GlobalKey<TooltipState> tooltipkeyRigth = GlobalKey<TooltipState>();
 
 
   @override
@@ -38,7 +40,11 @@ class _GameBoxLandScapeScreenState extends State<GameBoxLandScapeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildButton(type: Boxs.BUTTON_LEFT, onTap: () {}),
+          _buildButton( key: tooltipkeyLeft, type: Boxs.BUTTON_LEFT, onTap: () {
+              tooltipkeyLeft.currentState?.ensureTooltipVisible();
+          } ,  onLongPress: (){
+            print('onLongPress left landscape');
+          }),
           Expanded(
             child: SingleChildScrollView(
               controller: _scrollController,
@@ -68,18 +74,24 @@ class _GameBoxLandScapeScreenState extends State<GameBoxLandScapeScreen> {
             ),
             flex: 4,
           ),
-          _buildButton(type: Boxs.BUTTON_RIGTH, onTap: () {}),
+          _buildButton( key:tooltipkeyRigth , type: Boxs.BUTTON_RIGTH, onTap: () {
+              tooltipkeyRigth.currentState?.ensureTooltipVisible();
+          } , onLongPress: (){
+              print('onLongPress left landscape');
+          }),
         ],
       ),
     );
   }
 
-  Widget _buildButton({required String type, required void Function()? onTap}) {
+  Widget _buildButton({required Key key, required String type, required void Function()? onTap , required void Function()? onLongPress}) {
     return Expanded(
       child: Container(
         color: Colors.white,
         alignment: Alignment.bottomCenter,
-        child: BoxWidgets.buttonCircle(type: type, onTap: onTap),
+        child: BoxWidgets.buttonCircle(
+          key: key,
+          type: type, onTap: onTap , onLongPress:onLongPress ),
       ),
       flex: 1,
     );
