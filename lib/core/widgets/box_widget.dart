@@ -49,7 +49,7 @@ class BoxWidgets {
   }) {
     return InkWell(
       splashColor: Colors.black,
-      onTap: onTap,
+      onLongPress: onTap,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(

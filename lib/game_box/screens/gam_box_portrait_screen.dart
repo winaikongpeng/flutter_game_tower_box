@@ -18,7 +18,7 @@ class GameBoxPortraitScreen extends StatefulWidget {
 
 class _GameBoxPortraitScreenState extends State<GameBoxPortraitScreen> {
  final ScrollController _scrollController = ScrollController(); 
-
+ final GlobalKey<TooltipState> tooltipkey = GlobalKey<TooltipState>();
 
   @override
   void initState() {
@@ -39,23 +39,39 @@ class _GameBoxPortraitScreenState extends State<GameBoxPortraitScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
-            ),
-            BlocConsumer<GameBoxBloc, GameBoxState>(
-              builder: (ctx, state) {
-                if (state is GenerateRandomBoxStateSuccess) {
-                  return _generateBox(context, boxs: state.boxs);
-                }
-                return const SizedBox();
-              },
-              listener: (ctx, state) {
-                if (state is ErrorState) {
-                  // ignore: avoid_print
-                  print(state.message);
-                }
-              },
-            )
+Tooltip(
+  message: "long press to open dialog",
+  key: tooltipkey,
+  triggerMode: TooltipTriggerMode.manual,
+  child: GestureDetector(
+    onTap: () {
+      tooltipkey.currentState?.ensureTooltipVisible();
+    },
+    onLongPress: () {
+      print("show dialog");
+    },
+    child: Text("dialog"),
+  )),
+
+
+
+            // SizedBox(
+            //   height: MediaQuery.of(context).size.height * 0.1,
+            // ),
+            // BlocConsumer<GameBoxBloc, GameBoxState>(
+            //   builder: (ctx, state) {
+            //     if (state is GenerateRandomBoxStateSuccess) {
+            //       return _generateBox(context, boxs: state.boxs);
+            //     }
+            //     return const SizedBox();
+            //   },
+            //   listener: (ctx, state) {
+            //     if (state is ErrorState) {
+            //       // ignore: avoid_print
+            //       print(state.message);
+            //     }
+            //   },
+            // )
           ],
         ),
       ),
@@ -70,8 +86,14 @@ class _GameBoxPortraitScreenState extends State<GameBoxPortraitScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          BoxWidgets.buttonCircle(type: Boxs.BUTTON_LEFT, onTap: () {}),
-          BoxWidgets.buttonCircle(type: Boxs.BUTTON_RIGTH, onTap: () {}),
+          BoxWidgets.buttonCircle(type: Boxs.BUTTON_LEFT, onTap: () {
+
+            print('ontap buttun left');
+          }),
+          BoxWidgets.buttonCircle(type: Boxs.BUTTON_RIGTH, onTap: () {
+              print('ontap buttun rigth');
+
+          }),
         ],
       ),
     );

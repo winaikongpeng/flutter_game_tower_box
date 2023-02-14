@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_game_tower_box/game_box/bloc/game_box_event.dart';
 import '../bloc/game_box_bloc.dart';
 import 'gam_box_portrait_screen.dart';
 import 'game_box_landscape_screen.dart';
