@@ -1,12 +1,11 @@
 
 
-import 'dart:async';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_tower_box/core/widgets/box_widget.dart';
-import 'package:flutter_game_tower_box/core/widgets/dialog_widget.dart';
 import 'package:flutter_game_tower_box/game_box/bloc/game_box_event.dart';
 import 'package:flutter_game_tower_box/game_box/bloc/game_box_state.dart';
 import 'package:flutter_game_tower_box/game_box/models/box_model.dart';
@@ -24,7 +23,7 @@ class _GameBoxPortraitScreenState extends State<GameBoxPortraitScreen> {
  final ScrollController _scrollController = ScrollController(); 
  final GlobalKey<TooltipState> tooltipkeyLeft = GlobalKey<TooltipState>();
   final GlobalKey<TooltipState> tooltipkeyRigth = GlobalKey<TooltipState>();
-  late Timer _timer;
+  // late Timer _timer;
 
   //  Timer? countdownTimer;
   // Duration duration = const Duration(seconds: 2);
@@ -124,26 +123,7 @@ class _GameBoxPortraitScreenState extends State<GameBoxPortraitScreen> {
               
                  
 
- showDialog(
-  context: ctx,
-  builder: (BuildContext builderContext) {
-    _timer = Timer(Duration(seconds: 2), () {
-      Navigator.of(context).pop();
-    });
-
-    return AlertDialog(
-      backgroundColor: Colors.red,
-      title: Text('Title'),
-      content: SingleChildScrollView(
-        child: Text('Content'),
-      ),
-   );
-  }
-).then((val){
-  if (_timer.isActive) {
-    _timer.cancel();
-  }
-});
+ 
 
 
 
@@ -178,7 +158,7 @@ class _GameBoxPortraitScreenState extends State<GameBoxPortraitScreen> {
             type: Boxs.BUTTON_LEFT, onTap: () {
              tooltipkeyLeft.currentState?.ensureTooltipVisible();
           },onLongPress: (){
-                print('onLongPress left portrait');
+                // print('onLongPress left portrait');
                context.read<GameBoxBloc>().add(DestroyBoxEvent(index: 0 , type: ''));
           }
           
@@ -189,7 +169,7 @@ class _GameBoxPortraitScreenState extends State<GameBoxPortraitScreen> {
               tooltipkeyRigth.currentState?.ensureTooltipVisible();
           },
           onLongPress: (){
-              print('onLongPress rigth portrait');
+              // print('onLongPress rigth portrait');
           }),
         ],
       ),

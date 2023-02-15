@@ -34,7 +34,7 @@ class _GameTowerBoxMainScreenState extends State<_GameTowerBoxMainScreen> {
   @override
   void initState() {
     context.read<GameTowerBoxBloc>().add(GenerateRandomBoxs());
-    print('initState');
+    // print('initState');
     super.initState();
   }
 
@@ -139,7 +139,7 @@ class _GameTowerBoxMainScreenState extends State<_GameTowerBoxMainScreen> {
                       const SizedBox(width: 30),
                       ElevatedButton(
                           onPressed: () {
-                            print(state.boxs.length);
+                            // print(state.boxs.length);
                           },
                           child: const Text('Rigth')),
                     ],

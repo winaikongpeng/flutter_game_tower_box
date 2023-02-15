@@ -20,10 +20,23 @@
 //   }
 // }
 
-
 import 'package:flutter/material.dart';
-import 'package:flutter_game_tower_box/game_tower_box/game_tower_box.dart';
+
+import 'tower_box/screens/tower_box_screen.dart';
 
 void main() {
-  runApp(const GameTowerBoxScreen());
+  runApp(const RunApp());
+}
+
+class RunApp extends StatelessWidget {
+  const RunApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Game Tower Box',
+      home: TowerBoxScreen(),
+    );
+  }
 }

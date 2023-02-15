@@ -43,7 +43,7 @@ class _GameBoxLandScapeScreenState extends State<GameBoxLandScapeScreen> {
           _buildButton( key: tooltipkeyLeft, type: Boxs.BUTTON_LEFT, onTap: () {
               tooltipkeyLeft.currentState?.ensureTooltipVisible();
           } ,  onLongPress: (){
-            print('onLongPress left landscape');
+            // print('onLongPress left landscape');
           }),
           Expanded(
             child: SingleChildScrollView(
@@ -77,7 +77,7 @@ class _GameBoxLandScapeScreenState extends State<GameBoxLandScapeScreen> {
           _buildButton( key:tooltipkeyRigth , type: Boxs.BUTTON_RIGTH, onTap: () {
               tooltipkeyRigth.currentState?.ensureTooltipVisible();
           } , onLongPress: (){
-              print('onLongPress left landscape');
+              // print('onLongPress left landscape');
           }),
         ],
       ),

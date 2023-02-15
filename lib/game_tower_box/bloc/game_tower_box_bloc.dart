@@ -14,23 +14,23 @@ class GameTowerBoxBloc extends Bloc<GameTowerBoxEvent, GameTowerBoxState> {
     try {
       final genarateRandomBox = repository.generateBoxs();
       if (genarateRandomBox.isNotEmpty) {
-        print('genarateRandomBox done');
+        // print('genarateRandomBox done');
         emit(state.copyWith(
             towerStatus: TowerStatus.generateSuccess, boxs: genarateRandomBox));
       } else {
         emit(state.copyWith(
             towerStatus: TowerStatus.failure, message: 'failure'));
-        print('genarateRandomBox fail');
+        // print('genarateRandomBox fail');
       }
     } catch (e) {
       emit(state.copyWith(towerStatus: TowerStatus.failure));
-      print('genarateRandomBox error');
+      // print('genarateRandomBox error');
     }
   }
 
   void _onDestroyBox(DestroyBox event, Emitter<GameTowerBoxState> emit) {
  
-    print('box event all :${event.boxs.length} ');
+    // print('box event all :${event.boxs.length} ');
 
     // List<BoxModel> newBoxs = event.boxs;
 
@@ -40,13 +40,13 @@ class GameTowerBoxBloc extends Bloc<GameTowerBoxEvent, GameTowerBoxState> {
           event.boxs.removeWhere((item) => item == event.destroy) ;
       emit(state.copyWith(
             towerStatus: TowerStatus.complete, boxs: []));
-             print('box new all :${event.boxs.length} ');
-       print('complete');
+      //        print('box new all :${event.boxs.length} ');
+      //  print('complete');
       }
       event.boxs.removeWhere((item) => item == event.destroy) ;
       emit(state.copyWith(
             towerStatus: TowerStatus.generateSuccess, boxs: event.boxs));
-             print('box new all :${event.boxs.length} ');
+            //  print('box new all :${event.boxs.length} ');
 
       
     }
