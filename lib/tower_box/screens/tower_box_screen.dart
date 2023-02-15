@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'tower_box_landscape.dart';
-import 'tower_box_portrait.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_game_tower_box/tower_box/blocs/bloc/tower_bloc.dart';
+import 'landscape/tower_box_landscape.dart';
+import 'portrait/tower_box_portrait.dart';
 
 class TowerBoxScreen extends StatefulWidget {
   const TowerBoxScreen({super.key});
@@ -10,6 +12,12 @@ class TowerBoxScreen extends StatefulWidget {
 }
 
 class _TowerBoxScreenState extends State<TowerBoxScreen> {
+
+  @override
+  void initState() {
+    context.read<TowerBloc>().add(CreateRandomBoxs());
+    super.initState();
+  }
   // @override
   // Widget build(BuildContext context) => OrientationBuilder(
   //       builder: ((context, orientation) {

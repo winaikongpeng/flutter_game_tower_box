@@ -46,17 +46,17 @@ class BoxWidgets {
   static Widget buttonCircle({
     required Key key,
     required void Function()? onTap,
-     required void Function()? onLongPress,
+   required void Function(TapDownDetails)? onTapDown,
+   required void Function(TapUpDetails)?  onTapUp,
     required String type,
   }) {
     return Tooltip(
       message: Boxs.MESSAGE_ONTAP,
-      child: InkWell(
-        key: key,
-        splashColor: Colors.black,
-        onLongPress: onLongPress,
-        
-        onTap: onTap,
+      child: GestureDetector(
+     
+        onTapDown: onTapDown,
+        onTapUp:onTapUp ,
+       
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
@@ -65,7 +65,8 @@ class BoxWidgets {
             decoration: BoxDecoration(
                 border: Border.all(
                     color: const Color.fromARGB(255, 70, 69, 69), width: 2),
-                color: type == Boxs.BUTTON_LEFT ? Colors.pink : Colors.lightBlue,
+                color:
+                    type == Boxs.BUTTON_LEFT ? Colors.pink : Colors.lightBlue,
                 shape: BoxShape.circle),
           ),
         ),

@@ -3,13 +3,14 @@
 import 'dart:math';
 
 import 'package:flutter_game_tower_box/core/constants/box_constant.dart';
-import 'package:flutter_game_tower_box/game_tower_box/models/box_model.dart';
+import 'package:flutter_game_tower_box/tower_box/models/tower_box_model.dart';
+
+class TowerBoxRepository {
 
 
-class GameTowerBoxRepository {
-
-  List<BoxModel> generateBoxs(){
-     final boxs = List<BoxModel>.generate(Boxs.LENGTH, _checkGeneratedBox);
+  
+  List<TowerBoxModel> generateBoxs(){
+     final boxs = List<TowerBoxModel>.generate(Boxs.LENGTH, _checkGeneratedBox);
      if (boxs.isNotEmpty) {
         return boxs;
         
@@ -18,9 +19,9 @@ class GameTowerBoxRepository {
       }
   }
 
-BoxModel _checkGeneratedBox(int index) => (index == Boxs.LENGTH - 1)
-      ? BoxModel(index: index, styleBox: Boxs.LASTED_BOX)
-      : BoxModel(
+TowerBoxModel _checkGeneratedBox(int index) => (index == Boxs.LENGTH - 1)
+      ? TowerBoxModel(index: index, styleBox: Boxs.LASTED_BOX)
+      : TowerBoxModel(
           index: index,
           styleBox: _randomStringTwoValues(),
         );
@@ -31,5 +32,6 @@ BoxModel _checkGeneratedBox(int index) => (index == Boxs.LENGTH - 1)
     int index = random.nextInt(listRandomStyles.length);
     return listRandomStyles[index];
   }
+
 
 }
