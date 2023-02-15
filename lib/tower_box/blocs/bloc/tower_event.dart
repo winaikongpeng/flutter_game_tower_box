@@ -9,7 +9,6 @@ abstract class TowerEvent extends Equatable {
 
 class CreateRandomBoxs extends TowerEvent {}
 
-class UpdateBoxs extends TowerEvent {}
 
 class DeleteBoxs extends TowerEvent {
   final TowerBoxModel box;

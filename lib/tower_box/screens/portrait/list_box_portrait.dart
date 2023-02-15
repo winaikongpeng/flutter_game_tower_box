@@ -10,6 +10,7 @@ class TowerBoxListPortrait extends StatelessWidget {
   });
   final List<TowerBoxModel> boxs;
 
+
   @override
   Widget build(BuildContext context) {
     return Center(
