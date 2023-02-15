@@ -9,10 +9,12 @@ import 'package:flutter_game_tower_box/core/widgets/arrow_widget.dart';
 import 'package:flutter_game_tower_box/tower_box/blocs/bloc_exports.dart';
 import 'package:flutter_game_tower_box/tower_box/models/tower_box_model.dart';
 
+
 import 'list_box_landscape.dart';
 
 class TowerBoxLandScape extends StatefulWidget {
-  const TowerBoxLandScape({super.key});
+   const TowerBoxLandScape({super.key  });
+
 
   @override
   State<TowerBoxLandScape> createState() => _TowerBoxLandScapeState();
@@ -98,12 +100,16 @@ class _TowerBoxLandScapeState extends State<TowerBoxLandScape> {
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
+  scrollMaxExten() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    scrollMaxExten();
   }
 
   @override
@@ -113,6 +119,69 @@ class _TowerBoxLandScapeState extends State<TowerBoxLandScape> {
     return BlocBuilder<TowerBloc, TowerState>(
       builder: (context, state) {
         List<TowerBoxModel> boxs = state.boxs;
+
+        if (boxs.length == 1) {
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              useSafeArea: true,
+              builder: (_) {
+                return Scaffold(
+                  backgroundColor: Colors.transparent,
+                  body: Center(
+                    child: Container(
+                      width: 300,
+                      height: 150,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'MISSION COMPLETE',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            // const SizedBox(
+                            //   height: 20,
+                            // ),
+                            const Text(
+                              'TIME : 00:00',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            // const SizedBox(
+                            //   height: 20,
+                            // ),
+                            ElevatedButton(
+                              child: const Text('try again'),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                context
+                                    .read<TowerBloc>()
+                                    .add(CreateRandomBoxs());
+                                scrollMaxExten();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          });
+        }
 
         if (boxs.isEmpty) {
           return const Scaffold(
@@ -140,7 +209,7 @@ class _TowerBoxLandScapeState extends State<TowerBoxLandScape> {
               Expanded(
                 flex: 4,
                 child: SingleChildScrollView(
-                    controller: _scrollController,
+                  controller: _scrollController,
                   child: Stack(
                     alignment: AlignmentDirectional.bottomCenter,
                     children: [

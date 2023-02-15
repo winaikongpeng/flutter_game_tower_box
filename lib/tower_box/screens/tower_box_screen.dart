@@ -13,11 +13,17 @@ class TowerBoxScreen extends StatefulWidget {
 
 class _TowerBoxScreenState extends State<TowerBoxScreen> {
 
+
   @override
   void initState() {
     context.read<TowerBloc>().add(CreateRandomBoxs());
     super.initState();
+
+
   }
+
+
+
   // @override
   // Widget build(BuildContext context) => OrientationBuilder(
   //       builder: ((context, orientation) {
@@ -32,6 +38,8 @@ class _TowerBoxScreenState extends State<TowerBoxScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isPortrait = screenWidth < 501 ? true : false;
-    return isPortrait ? const TowerBoxPoertrait() : const TowerBoxLandScape();
+    return isPortrait
+        ? const TowerBoxPoertrait()
+        :const TowerBoxLandScape();
   }
 }
