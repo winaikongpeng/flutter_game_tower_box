@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter_game_tower_box/core/constants/box_constant.dart';
 import 'package:flutter_game_tower_box/tower_box/models/tower_box_model.dart';
 

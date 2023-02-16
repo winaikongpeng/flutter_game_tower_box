@@ -25,12 +25,13 @@ class TowerBoxListLandScape extends StatelessWidget {
           itemBuilder: ((context, index) {
             String styleBox = boxs[index].styleBox;
             if (styleBox == Boxs.LASTED_BOX) {
-             return Padding(
-                 padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.5),
-                  child: BoxWidgets.lastedBox(
-                      size: MediaQuery.of(context).size.width),
-                );
-            } 
+              return Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.5),
+                child: BoxWidgets.lastedBox(
+                    size: MediaQuery.of(context).size.width),
+              );
+            }
             return BoxWidgets.customBox(
                 styleBox: styleBox,
                 size: MediaQuery.of(context).size.width * 0.2);
@@ -40,5 +41,3 @@ class TowerBoxListLandScape extends StatelessWidget {
     );
   }
 }
-
-

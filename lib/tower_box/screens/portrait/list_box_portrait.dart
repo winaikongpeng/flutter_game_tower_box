@@ -10,13 +10,11 @@ class TowerBoxListPortrait extends StatelessWidget {
   });
   final List<TowerBoxModel> boxs;
 
-
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
         width: MediaQuery.of(context).size.width * 0.3,
-        // height: MediaQuery.of(context).size.height * 0.75,
         color: Colors.transparent,
         child: ListView.builder(
             padding: const EdgeInsets.only(top: 10),
@@ -27,7 +25,8 @@ class TowerBoxListPortrait extends StatelessWidget {
               String styleBox = boxs[index].styleBox;
               if (styleBox == Boxs.LASTED_BOX) {
                 return Padding(
-                  padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.5),
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.5),
                   child: BoxWidgets.lastedBox(
                       size: MediaQuery.of(context).size.width),
                 );
@@ -35,7 +34,6 @@ class TowerBoxListPortrait extends StatelessWidget {
               return BoxWidgets.customBox(
                   styleBox: styleBox,
                   size: MediaQuery.of(context).size.width * 0.2);
-            
             }),
       ),
     );
