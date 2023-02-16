@@ -43,23 +43,32 @@ class BoxWidgets {
     );
   }
 
-  static Widget buttonCirle({
+  static Widget buttonCircle({
+    required Key key,
     required void Function()? onTap,
+   required void Function(TapDownDetails)? onTapDown,
+   required void Function(TapUpDetails)?  onTapUp,
     required String type,
   }) {
-    return InkWell(
-      splashColor: Colors.black,
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          width: 100,
-          height: 100,
-          decoration: BoxDecoration(
-              border: Border.all(
-                  color: const Color.fromARGB(255, 70, 69, 69), width: 2),
-              color: type == Boxs.BUTTON_LEFT ? Colors.pink : Colors.lightBlue,
-              shape: BoxShape.circle),
+    return Tooltip(
+      message: Boxs.MESSAGE_ONTAP,
+      child: GestureDetector(
+     
+        onTapDown: onTapDown,
+        onTapUp:onTapUp ,
+       
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: const Color.fromARGB(255, 70, 69, 69), width: 2),
+                color:
+                    type == Boxs.BUTTON_LEFT ? Colors.pink : Colors.lightBlue,
+                shape: BoxShape.circle),
+          ),
         ),
       ),
     );

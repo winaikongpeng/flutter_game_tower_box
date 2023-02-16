@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/game_box_bloc.dart';
-import 'gam_box_portrait_screen.dart';
-import 'game_box_landscape_screen.dart';
+import 'package:flutter_game_tower_box/tower_box/blocs/bloc/tower_bloc.dart';
+import 'landscape/tower_box_landscape.dart';
+import 'portrait/tower_box_portrait.dart';
 
-class GameBoxScreen extends StatefulWidget {
-  const GameBoxScreen({super.key});
+class TowerBoxScreen extends StatefulWidget {
+  const TowerBoxScreen({super.key});
 
   @override
-  State<GameBoxScreen> createState() => _GameBoxScreenState();
+  State<TowerBoxScreen> createState() => _TowerBoxScreenState();
 }
 
-class _GameBoxScreenState extends State<GameBoxScreen> {
+class _TowerBoxScreenState extends State<TowerBoxScreen> {
+
+
   @override
   void initState() {
+    context.read<TowerBloc>().add(CreateRandomBoxs());
     super.initState();
-    context.read<GameBoxBloc>().add(GenerateRandomBoxEvent());
+
+
   }
+
+
 
   // @override
   // Widget build(BuildContext context) => OrientationBuilder(
@@ -33,7 +39,7 @@ class _GameBoxScreenState extends State<GameBoxScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isPortrait = screenWidth < 501 ? true : false;
     return isPortrait
-        ? const GameBoxPortraitScreen()
-        : const GameBoxLandScapeScreen();
+        ? const TowerBoxPoertrait()
+        :const TowerBoxLandScape();
   }
 }
