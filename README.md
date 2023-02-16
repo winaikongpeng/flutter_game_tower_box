@@ -4,6 +4,8 @@
 # Protrait 
 ![1676543475732](https://user-images.githubusercontent.com/62875771/219343579-01591d73-8ae6-4d6e-8b6c-364be21df44b.jpg)
 
+![1676543519623](https://user-images.githubusercontent.com/62875771/219344533-fe729cb7-60cd-42f4-9bf8-9e1aec39a579.jpg)
+
 
 # Landscape 
 ![1676543501689](https://user-images.githubusercontent.com/62875771/219344247-bcabcf26-a01a-4072-8b86-daf9d0da1992.jpg)
