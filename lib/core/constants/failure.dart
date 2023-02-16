@@ -2,4 +2,5 @@
 
 class ErrorMessage {
   static const UNKHOW_ERROR = 'Something went wrong';
+  static const MESSAGE_FAILURE_GENERATED = 'Problem generated boxs';
 }
