@@ -5,23 +5,19 @@ import 'package:flutter_game_tower_box/core/constants/box_constant.dart';
 import 'package:flutter_game_tower_box/core/widgets/arrow_widget.dart';
 import 'package:flutter_game_tower_box/tower_box/blocs/bloc_exports.dart';
 import 'package:flutter_game_tower_box/tower_box/models/tower_box_model.dart';
+import 'package:flutter_game_tower_box/tower_box/repositories/tower_box_repository.dart';
 
 import 'list_box_portrait.dart';
 
 class TowerBoxPoertrait extends StatefulWidget {
-  const TowerBoxPoertrait({super.key });
-
-
+  const TowerBoxPoertrait({super.key});
 
   @override
   State<TowerBoxPoertrait> createState() => _TowerBoxPoertraitState();
 }
 
 class _TowerBoxPoertraitState extends State<TowerBoxPoertrait> {
-  // final GlobalKey<TooltipState> tooltipkeyLeft = GlobalKey<TooltipState>();
-  // final GlobalKey<TooltipState> tooltipkeyRigth = GlobalKey<TooltipState>();
   final ScrollController _scrollController = ScrollController();
-
   bool _isButton1Pressed = false;
   bool _isButton2Pressed = false;
   bool _areBothButtonsPressed = false;
@@ -117,7 +113,7 @@ class _TowerBoxPoertraitState extends State<TowerBoxPoertrait> {
       builder: (context, state) {
         List<TowerBoxModel> boxs = state.boxs;
 
-        if (boxs.length == 1) {
+        if (state.total > 0) {
           SchedulerBinding.instance.addPostFrameCallback((_) {
             showDialog(
               context: context,
@@ -146,19 +142,21 @@ class _TowerBoxPoertraitState extends State<TowerBoxPoertrait> {
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold),
                             ),
-                            // const SizedBox(
-                            //   height: 20,
-                            // ),
-                            const Text(
-                              'TIME : 00:00',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
+                            BlocBuilder<TowerBloc, TowerState>(
+                              builder: (context, state) {
+                                String total =
+                                    TowerBoxRepository.convertIntToTime(
+                                        state.total);
+
+                                return Text(
+                                  'total : $total ',
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                );
+                              },
                             ),
-                            // const SizedBox(
-                            //   height: 20,
-                            // ),
                             ElevatedButton(
                               child: const Text('try again'),
                               onPressed: () {
